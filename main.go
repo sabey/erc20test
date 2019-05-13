@@ -10,9 +10,24 @@ import (
 	"os"
 )
 
+/*
+
+Using only the Golang standard library and the etherscan.io/apis create a program that:
+
+1. Accepts an ethereum address as a flag `./betest -address="0xea38eaa3c86c8f9b751533ba2e562deb9acded40"`
+2. Retrieves a list of all ERC20 token transfer events in ascending order for the FUEL contract: 0xea38eaa3c86c8f9b751533ba2e562deb9acded40
+3. Print to the stdour/stderr TWO JSON Transaction objects: one containing the largest `value` and another for the largest `gasPrice`
+4. Print to a file `results.json` a JSON array of all of the Transactions
+
+*/
+
 const (
-	env        = `api` // `api-ropsten`
+	env      = `api` // `api-ropsten`
+	tokenURL = `http://%s.etherscan.io/api?module=account&action=tokentx&contractaddress=%s&startblock=0&endblock=999999999&sort=asc&page=%d&offset=10000`
+)
+const (
 	BinanceBNB = `0xB8c77482e45F1F44dE1745F52C74426C631bDD52`
+	Fuel       = `0xea38eaa3c86c8f9b751533ba2e562deb9acded40`
 )
 
 var (
@@ -169,7 +184,7 @@ func get(
 	if page < 1 {
 		page = 1
 	}
-	url := fmt.Sprintf(`http://%s.etherscan.io/api?module=account&action=tokentx&contractaddress=%s&startblock=0&endblock=999999999&sort=asc&page=%d&offset=1000`,
+	url := fmt.Sprintf(tokenURL,
 		env,
 		address,
 		page,
