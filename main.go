@@ -115,8 +115,12 @@ func getAll(
 		body, err := ioutil.ReadAll(response.Body)
 		if err != nil {
 			log.Fatalf("failed to read body: \"%s\"\n", err)
+			// close body - do not defer
+			response.Body.Close()
 			return nil, err
 		}
+		// close body - do not defer
+		response.Body.Close()
 		// parse result
 		result := &Result{}
 		if err := json.Unmarshal(body, result); err != nil {
