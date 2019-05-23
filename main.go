@@ -15,7 +15,7 @@ import (
 Using only the Golang standard library and the etherscan.io/apis create a program that:
 
 1. Accepts an ethereum address as a flag `./betest -address="0xea38eaa3c86c8f9b751533ba2e562deb9acded40"`
-2. Retrieves a list of all ERC20 token transfer events in ascending order for the FUEL contract: 0xea38eaa3c86c8f9b751533ba2e562deb9acded40
+2. Retrieves "Get a list of "ERC20 - Token Transfer Events" by Address" in ascending order for the FUEL contract: 0xea38eaa3c86c8f9b751533ba2e562deb9acded40
 3. Print to the stdour/stderr TWO JSON Transaction objects: one containing the largest `value` and another for the largest `gasPrice`
 4. Print to a file `results.json` a JSON array of all of the Transactions
 
